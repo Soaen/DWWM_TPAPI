@@ -26,28 +26,22 @@ module.exports = {
         })
     },
     
-    update(req,res){
-        const car = new CarModel({...req.body});
-
-        car.save().then(() => {
-            res.send({
-                response: `Mise à jour de la voiture ${car.name} effectuée avec succès`
+    update(req, res) {
+        const id = req.params.id;
+        const updatedData = req.body;
+    
+        CarModel.findByIdAndUpdate(id, updatedData, { new: true })
+            .then(updatedCar => {
+                if (!updatedCar) {
+                    return res.status(404).json({ error: 'La voiture n\'a pas été trouvée' });
+                }
+                res.json(updatedCar);
+            })
+            .catch(err => {
+                console.error(err);
+                res.status(500).json({ error: 'Erreur lors de la mise à jour de la voiture' });
             });
-        })
     },
-
-    create(req,res){
-        const car = new CarModel({...req.body});
-
-        CarModel.find
-
-        car.find().then(() => {
-            res.send({
-                response: `Création de la voiture ${car.name} effectuée avec succès`
-            });
-        })
-    },
-
     delete(req,res){
         const id = req.params.id;
 

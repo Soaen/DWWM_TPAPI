@@ -37,7 +37,7 @@ onMounted(() => {
     <section class="section-car">
       <article v-for="data in datas">
         <img :src="data.image" :alt="'Photo d\'une voiture de modele ' + data.name" srcset="">
-        <p>{{ data.name }}</p>
+        <p>{{ data.brand != undefined ? data.brand + ' ' + data.name : data.name  }}</p>
         <div>
           <button>{{ data.price }}€</button>
           <button v-on:click="deleteCar(data._id)">Supprimer</button>
