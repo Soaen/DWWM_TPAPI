@@ -41,7 +41,7 @@ onMounted(() => {
         <div>
           <button>{{ data.price }}€</button>
           <button v-on:click="deleteCar(data._id)">Supprimer</button>
-          <RouterLink :to="'modify/' + data._id ">Modifié</RouterLink>
+          <RouterLink :to="'modify/' + data._id ">Modifier</RouterLink>
         </div>
 
       </article>

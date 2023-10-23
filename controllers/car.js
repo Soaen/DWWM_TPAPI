@@ -25,26 +25,15 @@ module.exports = {
             });
         })
     },
-
+    
     update(req,res){
-    const carId = req.params.carId; // Supposons que vous avez l'identifiant du véhicule que vous souhaitez mettre à jour dans les paramètres de la requête.
+        const car = new CarModel({...req.body});
 
-    const updatedData = req.body; // Les nouvelles données que vous souhaitez utiliser pour la mise à jour.
-
-    CarModel.findOneAndUpdate({ _id: carId }, updatedData, { new: true }, (err, car) => {
-        if (err) {
-            return res.status(500).json({ error: "Erreur lors de la mise à jour de la voiture" });
-        }
-
-        if (!car) {
-            return res.status(404).json({ error: "Voiture non trouvée" });
-        }
-
-        res.json({
-            response: `Mise à jour de la voiture ${car.name} effectuée avec succès`,
-            updatedCar: car
-        });
-    });
+        car.save().then(() => {
+            res.send({
+                response: `Mise à jour de la voiture ${car.name} effectuée avec succès`
+            });
+        })
     },
 
     create(req,res){

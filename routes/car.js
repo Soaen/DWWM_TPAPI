@@ -16,7 +16,8 @@ module.exports = server => {
     server.post("/cars", (req, res) =>{
         CarController.create(req,res);
     })
-    server.put("/cars/:carId", (req, res) =>{
+
+    server.put("/cars", (req, res) =>{
         CarController.update(req,res);
     })
 
